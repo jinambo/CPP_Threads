@@ -31,8 +31,11 @@ private slots:
 
     // Erat
     void on_eratStart_clicked();
+    void on_eratStop_clicked();
+    void on_eratPause_clicked();
     void getResultPrimes(const QList<int> &primes);
     void updateEratProgressBar(int firstItTime, int allItsTime);
+    void updateEratTimeUI();
     void updateEratEstimatedTime(qint64 estimated);
 
 private:
@@ -49,6 +52,11 @@ private:
 
     // Erat
     Erat eratCalculator;
+    bool isEratPaused = false;
+    QTimer realtimeEratTimer;
     QElapsedTimer eratTimer;
+    QTime startEratTime;
+    QTime pauseEratTime;
+    int timerEratPauseValue = 0;
 };
 #endif // MAINWINDOW_H

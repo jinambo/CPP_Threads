@@ -2,7 +2,7 @@
 #define ERAT_H
 
 #include <QThread>
-#include <QBitArray>
+#include <QVector>
 
 class Erat : public QThread
 {
@@ -13,6 +13,10 @@ public:
     void run() override;
     void setFrom(int from);
     void setTo(int to);
+    void startThread();
+    void pause();
+    void resume();
+    void stop();
 
 signals:
     void primesReady(const QList<int> &primes);
@@ -22,10 +26,15 @@ signals:
 private:
     int m_from;
     int m_to;
-    int m_limit;
-    QBitArray m_sieve;
+    QVector<bool> m_sieve;
     qint64 estimatedFirst;
     qint64 estimated;
+    QVector<bool> m_storedSieve;
+    int m_estimatedCounter = 0;
+    int m_currentIteration = 2;
+    int m_storedIteration = 2;
+    bool m_stopped;
+    bool m_paused;
 };
 
 #endif // ERAT_H
