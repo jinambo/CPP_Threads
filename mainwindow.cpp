@@ -18,6 +18,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(&eratCalculator, &Erat::progress, this, &MainWindow::updateEratProgressBar);
     connect(&eratCalculator, &Erat::estimatedTime, this, &MainWindow::updateEratEstimatedTime);
     connect(&realtimeEratTimer, &QTimer::timeout, this, &MainWindow::updateEratTimeUI);
+
+    // Get main thread ID
+    qInfo() << "Main thread ID: " << QThread::currentThreadId();
 }
 
 MainWindow::~MainWindow() {
@@ -97,6 +100,7 @@ void MainWindow::getResult(unsigned long int result) {
 
     // Start realtime timer
     realtimeTimer.stop();
+    timerPauseValue = 0;
 }
 
 void MainWindow::updateProgressBar(int iteration, int maxIterations) {
@@ -169,6 +173,8 @@ void MainWindow::getResultPrimes(const QList<int> &primes) {
 
     // Start realtime timer
     realtimeEratTimer.stop();
+
+    timerEratPauseValue = 0;
 }
 
 void MainWindow::updateEratProgressBar(int firstItTime, int allItsTime) {

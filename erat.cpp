@@ -62,6 +62,9 @@ void Erat::run() {
             qDebug() << "Estimated time for finding primes from" << m_from << "to" << m_to << ":" << estimated << "ms";
         }
 
+        qInfo() << "Calculating erat in thread (ID): " << currentThreadId();
+
+        // Send result using signal
         emit progress(m_estimatedCounter += estimatedFirst, estimated);
     }
 

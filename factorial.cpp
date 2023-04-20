@@ -37,6 +37,8 @@ void Factorial::run() {
             emit estimatedTime(estimated);
             qDebug() << "Estimated time for" << m_number << "iterations: " << estimated << "ms";
         }
+
+        qInfo() << "Calculating factorial in thread (ID): " << currentThreadId();
     }
 
     // Send result using signal
